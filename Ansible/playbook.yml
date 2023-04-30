@@ -1,0 +1,52 @@
+- name: Deploy webapp
+  hosts: webapp
+  become: true
+  tasks:
+    - name: Update and upgrade packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install git
+      yum:
+        name: git
+        state: present
+
+    - name: Install Node.js
+      yum:
+        name: nodejs
+        state: present
+
+    - name: Clone application repository
+      git:
+        repo: 'https://gitlab.com/viktorsvensson/automation_express.git'
+        dest: '/opt/automation_express'
+      
+    - name: Install application dependencies
+      command: npm install
+      args:
+        chdir: /opt/automation_express
+
+    - name: Create automation_express service file
+      ansible.builtin.template:
+        src: automation_express_service.j2
+        dest: /etc/systemd/system/automation_express.service
+      become: true
+
+    - name: Reload systemd
+      ansible.builtin.systemd:
+        daemon_reload: yes
+      become: true
+
+    - name: Enable automation_express service
+      ansible.builtin.systemd:
+        name: automation_express
+        enabled: yes
+      become: true
+
+    - name: Start automation_express service
+      ansible.builtin.systemd:
+        name: automation_express
+        state: started
+      become: true
+

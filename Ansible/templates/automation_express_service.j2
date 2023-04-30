@@ -1,0 +1,13 @@
+[Unit]
+Description=Automation Express Web Application
+After=network.target
+
+[Service]
+User=ec2-user
+WorkingDirectory=/opt/automation_express
+ExecStart=/usr/bin/npm start
+Environment=PATH=/usr/bin:/usr/local/bin
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
