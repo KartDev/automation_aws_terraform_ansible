@@ -37,24 +37,34 @@ Project Structure
 Steps
 
 1. Set up AWS credentials
+
    Configure your AWS credentials by running:
+   
 aws configure 
 
 2. Deploy infrastructure with Terraform
+
 Navigate to the terraform directory and initialize Terraform.
 
 cd terraform
+
 terraform init
+
 terraform apply
 
 3. Update Ansible inventory
    After the apply command completes, copy the public IP address from the Terraform outputs and update the ansible/inventory.ini file with the IP address.
 
 [webapp]
-webapp_instance ansible_host=<PUBLIC_IP> ansible_user=ec2-user ansible_ssh_private_key_file=<PATH_TO_PRIVATE_KEY> 4. Configure the EC2 instance with Ansible
+
+webapp_instance ansible_host=<PUBLIC_IP> ansible_user=ec2-user ansible_ssh_private_key_file=<PATH_TO_PRIVATE_KEY> 
+
+4. Configure the EC2 instance with Ansible
+
 Navigate to the ansible directory and run the playbook.
 
 cd ../ansible
+
 ansible-playbook -i inventory.ini playbook.yml
 
 This playbook will:
