@@ -1,4 +1,4 @@
-##Deploying an Express.js Application on AWS EC2 with Terraform and Ansible
+Deploying an Express.js Application on AWS EC2 with Terraform and Ansible
 
 This README provides instructions for deploying an Express.js application on an AWS EC2 instance using Terraform for infrastructure provisioning and Ansible for configuration management.
 
@@ -14,15 +14,23 @@ GitLab repository containing the application
 
 Project Structure
 
-.
+
 ├── ansible
+
 │ ├── inventory.ini
+
 │ ├── playbook.yml
+
 │ └── templates
+
 │ └── automation_express_service.j2
+
 └── terraform
+
 ├── main.tf
+
 ├── outputs.tf
+
 └── variables.tf
 
 
